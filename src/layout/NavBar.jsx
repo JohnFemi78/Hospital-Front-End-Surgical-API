@@ -48,7 +48,19 @@ function NavBar() {
           </li>
         ) : null}
 
-        {isAuth ? (
+        {isAuth ? ( <>  
+   <li>   
+          <NavLink
+                        to="/profile"
+                        className={({ isActive }) =>
+                          isActive ? "active-link" : "sidebar-link"
+                        }
+                      >
+                        Profile
+                      </NavLink>
+                      </li>
+
+
           <li>
             <NavLink
               to="/signOut"
@@ -59,6 +71,9 @@ function NavBar() {
               Sign Out
             </NavLink>
           </li>
+        </>
+
+          
         ) : null}
       </ul>
     </nav>

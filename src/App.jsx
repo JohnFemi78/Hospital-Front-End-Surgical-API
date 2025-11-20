@@ -10,7 +10,6 @@ import Footer from "./layout/Footer";
 import DashBoard from "./Components/DashBoard";
 import SignOut from "./Components/SignOut";
 import Register from "./pages/Register";
-import SideBar from "./Components/Sidebar"
 import Profile from "./pages/Profile";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
@@ -23,7 +22,6 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <SideBar />
       <ToastContainer/>
         
           <Routes>

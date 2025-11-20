@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { storeContext } from "../context/storeContext";
 import Spinner from "../layout/Spinner";
 import { toast } from "react-toastify";
-import Sidebar from "./Sidebar";
 
 export default function Dashboard() {
   const {
@@ -177,7 +176,6 @@ export default function Dashboard() {
 
   return (
     <div className="schedule-dashboard">
-      <Sidebar/>
       <div className="sd-header">
         <h1 className="sd-title">Surgery Schedule Manager</h1>
         <p className="sd-sub">Create and manage surgery appointments</p>
