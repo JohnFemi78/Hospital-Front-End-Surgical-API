@@ -9,10 +9,10 @@ function Profile() {
     const userEmail = profile?.user?.email;
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-      fullName: "",
-      phoneNumber: "",
-      speciality: "",
-      bloodGroup: "",
+      fullName: profile?.fullName || "",
+      phoneNumber: profile?.phoneNumber || "",
+      speciality: profile?.speciality || "",
+      bloodGroup: profile?.bloodGroup || "",
     });
     
 
