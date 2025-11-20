@@ -1,0 +1,63 @@
+/* === Import Local Fonts (Offline) === */
+@import "@fontsource/poppins/300.css";   /* Light */
+@import "@fontsource/poppins/400.css";   /* Regular */
+@import "@fontsource/poppins/600.css";   /* SemiBold */
+@import "@fontsource/inter/400.css";     /* Regular */
+@import "@fontsource/inter/500.css";     /* Medium */
+@import "@fontsource/inter/700.css";     /* Bold */
+
+/* === Global Typography === */
+:root {
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --color-text: #1a1a1a;
+  --color-muted: #555;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: #111827;
+  margin: 0 0 0.4em 0;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+p {
+  font-family: var(--font-body);
+  margin-bottom: 1rem;
+  color: var(--color-muted);
+}
+
+/* === Buttons & Forms === */
+button, input, textarea, select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* === Utility Classes === */
+.text-bold {
+  font-weight: 600;
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
