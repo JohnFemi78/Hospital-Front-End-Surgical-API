@@ -54,6 +54,7 @@ function Profile() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   async function updateProfile() {
+    console.log(formData);
     try {
       setIsLoading(true);
 
