@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Spinner from "../layout/Spinner";
 
 function Profile() {
-  const { localStorageToken, API, setIsLoading, isLoading } =
+  const { localStorageToken, API, setIsLoading, isLoading, user } =
     useContext(storeContext);
 
   const [profile, setProfile] = useState(null);
@@ -19,7 +19,6 @@ function Profile() {
 
   const profilePicture = "https://i.imgur.com/uIgDDDd.png";
 
-  // Fetch Profile
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -37,10 +36,10 @@ function Profile() {
         setProfile(data.profile);
 
         setFormData({
-          fullName: data.profile.fullName ?? "",
-          phoneNumber: data.profile.phoneNumber ?? "",
-          speciality: data.profile.speciality ?? "",
-          bloodGroup: data.profile.bloodGroup ?? "",
+          fullName: data.profile.fullName || "",
+          phoneNumber: data.profile.phoneNumber || "",
+          speciality: data.profile.speciality || "",
+          bloodGroup: data.profile.bloodGroup || "",
         });
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -50,17 +49,9 @@ function Profile() {
     fetchProfile();
   }, []);
 
-  const userEmail = profile?.email;
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Handle input
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  // Update Profile
   async function updateProfile() {
     try {
       setIsLoading(true);
@@ -78,44 +69,31 @@ function Profile() {
       if (!res.ok) throw new Error(data.message);
 
       toast.success("Profile updated successfully");
-
       setProfile(data.profile);
       setIsEditing(false);
     } catch (err) {
-      toast.error(`Error updating profile: ${err.message}`);
+      toast.error(err.message);
     } finally {
       setIsLoading(false);
     }
   }
 
-  if (!profile)
-    return (
-      <div style={{ textAlign: "center", marginTop: "30px" }}>
-        Loading profile...
-      </div>
-    );
+  if (!profile) return <Spinner />;
 
-  if (isLoading) return <Spinner />;
+  const userEmail = user?.email || "Email not available";
 
   return (
     <div className="profile-container">
-      {/* EDIT BUTTON */}
-      <button onClick={() => setIsEditing(true)} className="profile-edit-btn">
-        Edit Profile
-      </button>
 
-      {/* PROFILE PICTURE */}
-      <div className="profile-photo-wrapper">
-        <img src={profilePicture} alt="Profile" className="profile-photo" />
-      </div>
-
-      {/* HEADER */}
       <div className="profile-header">
-        <h2>{profile.fullName}</h2>
-        <p>Email: {profile.email}</p>
+        <h2>{profile.fullName || "No Name"}</h2>
+        <p>{userEmail}</p>
       </div>
 
-      {/* FIELDS */}
+      <div className="profile-photo-wrapper">
+        <img src={profilePicture} className="profile-photo" alt="profile" />
+      </div>
+
       <ProfileField
         label="Full Name"
         name="fullName"
@@ -148,17 +126,24 @@ function Profile() {
         onChange={handleChange}
       />
 
-      {/* BUTTONS */}
       {isEditing && (
         <div className="profile-actions">
           <button onClick={updateProfile} className="profile-update-btn">
             Update Profile
           </button>
-
-          <button onClick={() => setIsEditing(false)} className="profile-cancel-btn">
+          <button
+            onClick={() => setIsEditing(false)}
+            className="profile-cancel-btn"
+          >
             Cancel
           </button>
         </div>
+      )}
+
+      {!isEditing && (
+        <button onClick={() => setIsEditing(true)} className="profile-edit-btn">
+          Edit Profile
+        </button>
       )}
     </div>
   );
@@ -174,7 +159,6 @@ function ProfileField({ label, name, value, isEditing, onChange }) {
           name={name}
           value={value || ""}
           onChange={onChange}
-          className="profile-input"
         />
       ) : (
         <p>{value || "Not available"}</p>
