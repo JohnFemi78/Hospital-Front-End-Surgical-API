@@ -163,7 +163,7 @@ body {
 
 
 
-/* Hero section example */
+/* Hero section
 .hero {
   text-align: center;
   padding: 4rem 1rem;
@@ -200,6 +200,7 @@ body {
   gap: 60px;
   padding: 40px;
   max-width: 1200px;
+  height: 80vh;
   margin: auto;
   margin-bottom: 70px;
 }
@@ -207,6 +208,7 @@ body {
 /* LEFT TEXT SECTION */
 .hero-content {
   flex: 1;
+
 }
 
 .hero-title {
