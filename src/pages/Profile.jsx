@@ -15,6 +15,7 @@ function Profile() {
     phoneNumber: "",
     speciality: "",
     bloodGroup: "",
+    role:"PATIENT"
   });
 
   const profilePicture = "https://i.imgur.com/uIgDDDd.png";
@@ -22,7 +23,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`${API}/profile/single`, {
+        const res = await fetch(`${API}/profile/:single`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
